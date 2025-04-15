@@ -1,7 +1,5 @@
-/workspace-verification/.gradle/
-/workspace-verification/build/
-/workspace-verification/composeApp/.gradle/
-/workspace-verification/composeApp/build/
-/workspace-verification/.kotlin/
-/workspace-verification/.idea/
-/.idea/
+.idea/
+.gradle/
+.idea/
+.kotlin/
+build/
