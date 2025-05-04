@@ -3,3 +3,5 @@
 .idea/
 .kotlin/
 build/
+google-services.json
+GoogleService-Info.plist
