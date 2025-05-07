@@ -9,9 +9,9 @@ struct ContentView: View {
     var body: some View {
         VStack(spacing: 8) {
             //Different modules
-            let moduleA = useClassFromA()
+            let moduleA = ClassFromA(name:"class_A")
             Text("Module A: \(moduleA.hello())")
-            let moduleB = useClassFromB()
+            let moduleB = ClassFromB(name:"class_B")
             Text("Module B: \(moduleB.hello()) ")
 
             //Typealias

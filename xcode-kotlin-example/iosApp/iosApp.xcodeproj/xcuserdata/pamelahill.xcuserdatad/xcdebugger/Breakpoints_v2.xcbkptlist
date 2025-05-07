@@ -8,7 +8,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "0CF20A86-B2E1-4ECA-A5F8-2A7E82002CC4"
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iosApp/ContentView.swift"
@@ -18,6 +18,64 @@
             endingLineNumber = "53"
             landmarkName = "loadLaunches(forceReload:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "0CF20A86-B2E1-4ECA-A5F8-2A7E82002CC4 - a09ea71c395f721c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for closure #1 () async -&gt; () in SpaceTutorial.ContentView.ViewModel.loadLaunches(forceReload: Swift.Bool) -&gt; ()"
+                  moduleName = "SpaceTutorial.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pamelahill/StudioProjects/deep-dive-into-kmp/xcode-kotlin-example/iosApp/iosApp/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53">
+               </Location>
+               <Location
+                  uuid = "0CF20A86-B2E1-4ECA-A5F8-2A7E82002CC4 - 7b12b09a9bb4d93a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for closure #1 () async -&gt; () in SpaceTutorial.ContentView.ViewModel.loadLaunches(forceReload: Swift.Bool) -&gt; ()"
+                  moduleName = "SpaceTutorial.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pamelahill/StudioProjects/deep-dive-into-kmp/xcode-kotlin-example/iosApp/iosApp/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53">
+               </Location>
+               <Location
+                  uuid = "0CF20A86-B2E1-4ECA-A5F8-2A7E82002CC4 - ba1d01ed5f24361e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for closure #1 () async -&gt; () in SpaceTutorial.ContentView.ViewModel.loadLaunches(forceReload: Swift.Bool) -&gt; ()"
+                  moduleName = "SpaceTutorial.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pamelahill/StudioProjects/deep-dive-into-kmp/xcode-kotlin-example/iosApp/iosApp/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53">
+               </Location>
+               <Location
+                  uuid = "0CF20A86-B2E1-4ECA-A5F8-2A7E82002CC4 - 40dcb12ac1c0941f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for closure #1 () async -&gt; () in SpaceTutorial.ContentView.ViewModel.loadLaunches(forceReload: Swift.Bool) -&gt; ()"
+                  moduleName = "SpaceTutorial.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pamelahill/StudioProjects/deep-dive-into-kmp/xcode-kotlin-example/iosApp/iosApp/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -111,28 +169,28 @@
             moduleName = "">
             <Locations>
                <Location
-                  uuid = "E2A9A887-C7D3-43A8-AD7E-42E5B00ECFC1 - f7af065087989744"
+                  uuid = "E2A9A887-C7D3-43A8-AD7E-42E5B00ECFC1 - 36776c477fc50464"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "kfun:com.jetbrains.spacetutorial.SpaceXSDK#getLaunches#suspend(kotlin.Boolean;kotlin.coroutines.Continuation&lt;kotlin.collections.List&lt;com.jetbrains.spacetutorial.entity.RocketLaunch&gt;&gt;){}kotlin.Any"
                   moduleName = "SpaceTutorial.debug.dylib"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/pamelahill/StudioProjects/deep-dive-into-kmp/xcode-kotlin-example/kmp-networking-and-data-storage/shared/src/commonMain/kotlin/com/jetbrains/spacetutorial/SpaceXSDK.kt"
+                  urlString = "file:///Users/pamelahill/StudioProjects/deep-dive-into-kmp/xcode-kotlin-example/shared/src/commonMain/kotlin/com/jetbrains/spacetutorial/SpaceXSDK.kt"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "11"
                   endingLineNumber = "11">
                </Location>
                <Location
-                  uuid = "E2A9A887-C7D3-43A8-AD7E-42E5B00ECFC1 - 113b3841f3e6404e"
+                  uuid = "E2A9A887-C7D3-43A8-AD7E-42E5B00ECFC1 - ec21bf98e566ae39"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "kfun:com.jetbrains.spacetutorial.KoinHelper#getLaunches#suspend(kotlin.Boolean;kotlin.coroutines.Continuation&lt;kotlin.collections.List&lt;com.jetbrains.spacetutorial.entity.RocketLaunch&gt;&gt;){}kotlin.Any"
                   moduleName = "SpaceTutorial.debug.dylib"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/pamelahill/StudioProjects/deep-dive-into-kmp/xcode-kotlin-example/kmp-networking-and-data-storage/shared/src/iosMain/kotlin/com/jetbrains/spacetutorial/KoinHelper.kt"
+                  urlString = "file:///Users/pamelahill/StudioProjects/deep-dive-into-kmp/xcode-kotlin-example/shared/src/iosMain/kotlin/com/jetbrains/spacetutorial/KoinHelper.kt"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "27"
