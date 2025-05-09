@@ -1,6 +1,7 @@
 package com.jetbrains.cameraapp.filter
 
 import android.graphics.*
+import android.media.ExifInterface
 import java.io.File
 
 internal fun validate(imagePath: String) {
@@ -11,8 +12,48 @@ internal fun validate(imagePath: String) {
 }
 
 internal fun loadOriginalBitmap(imagePath: String): Bitmap {
-    return BitmapFactory.decodeFile(imagePath)
+    // Load the bitmap
+    val bitmap = BitmapFactory.decodeFile(imagePath)
         ?: throw IllegalArgumentException("Failed to load image: $imagePath")
+
+    // Get the EXIF orientation
+    val exif = ExifInterface(imagePath)
+    val orientation = exif.getAttributeInt(
+        ExifInterface.TAG_ORIENTATION,
+        ExifInterface.ORIENTATION_NORMAL
+    )
+
+    // Rotate the bitmap if needed
+    val matrix = Matrix()
+    when (orientation) {
+        ExifInterface.ORIENTATION_ROTATE_90 -> matrix.postRotate(90f)
+        ExifInterface.ORIENTATION_ROTATE_180 -> matrix.postRotate(180f)
+        ExifInterface.ORIENTATION_ROTATE_270 -> matrix.postRotate(270f)
+        ExifInterface.ORIENTATION_FLIP_HORIZONTAL -> matrix.preScale(-1f, 1f)
+        ExifInterface.ORIENTATION_FLIP_VERTICAL -> matrix.preScale(1f, -1f)
+        ExifInterface.ORIENTATION_TRANSPOSE -> {
+            matrix.preScale(-1f, 1f)
+            matrix.postRotate(270f)
+        }
+        ExifInterface.ORIENTATION_TRANSVERSE -> {
+            matrix.preScale(-1f, 1f)
+            matrix.postRotate(90f)
+        }
+    }
+
+    // Apply the rotation if needed
+    return if (matrix.isIdentity) {
+        bitmap
+    } else {
+        val rotatedBitmap = Bitmap.createBitmap(
+            bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true
+        )
+        // Recycle the original bitmap if we created a new one
+        if (rotatedBitmap != bitmap) {
+            bitmap.recycle()
+        }
+        rotatedBitmap
+    }
 }
 
 internal fun createBitmap(originalBitmap: Bitmap): Bitmap {

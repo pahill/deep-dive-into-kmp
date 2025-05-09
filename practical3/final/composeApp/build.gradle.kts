@@ -72,6 +72,8 @@ kotlin {
             dependencies {
                 implementation(compose.desktop.currentOs)
                 implementation(libs.kotlinx.coroutines.swing)
+                implementation(libs.filekit.dialogs.core)
+                implementation(libs.filekit.dialogs.compose)
             }
         }
         val androidMain by getting {
