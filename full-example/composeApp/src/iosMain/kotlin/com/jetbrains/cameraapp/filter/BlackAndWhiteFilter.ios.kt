@@ -57,9 +57,11 @@ class IOSBlackAndWhiteFilter : BlackAndWhiteFilter{
                 } else {
                     throw IllegalStateException("Failed to encode processed image")
                 }
+                //CGImageRelease(grayscaleImage)
             } else {
                 throw IllegalStateException("Failed to create grayscale image")
             }
+            //CGContextRelease(context)
         } else {
             throw IllegalStateException("Failed to create graphics context")
         }
