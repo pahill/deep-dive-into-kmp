@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "108818185832",
+    "project_id": "kotlinconfcameraapp-4fc42",
+    "storage_bucket": "kotlinconfcameraapp-4fc42.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:108818185832:android:0a88673f96b358d41845dd",
+        "android_client_info": {
+          "package_name": "com.jetbrains.cameraapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0RslaEWInOzFuy7b0OYbYjwWRcbn_uLo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

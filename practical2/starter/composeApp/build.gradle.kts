@@ -1,51 +1,104 @@
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
-    alias(libs.plugins.jetbrainsCompose)
-    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kotlinxSerialization)
+    id("com.google.gms.google-services")
 }
 
 kotlin {
     androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
-    
-    sourceSets {
-        androidMain.dependencies {
-            implementation(compose.preview)
-            implementation(libs.androidx.activity.compose)
-            implementation(libs.androidx.compose.material3)
-            implementation(libs.koin.androidx.compose)
-            implementation(libs.androidx.lifecycle.viewmodel.compose)
+
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach { iosTarget ->
+        iosTarget.binaries.framework {
+            baseName = "ComposeApp"
+            isStatic = true
+            export("io.github.mirzemehdi:kmpnotifier:1.5.1")
         }
-        commonMain.dependencies {
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
-            implementation(projects.shared)
+    }
+
+    jvm("desktop")
+
+    applyDefaultHierarchyTemplate() //Apply the default hierarchy again
+
+    sourceSets {
+        val commonMain by getting {
+            dependencies {
+                implementation(compose.runtime)
+                implementation(compose.foundation)
+                implementation(compose.material3)
+                implementation(compose.ui)
+                implementation(compose.components.resources)
+                implementation(compose.components.uiToolingPreview)
+                implementation(libs.androidx.lifecycle.viewmodel)
+                implementation(libs.lifecycle.viewmodel.compose)
+                implementation(libs.androidx.lifecycle.runtime.compose)
+                implementation(libs.koin.core)
+                implementation(libs.koin.compose.viewmodel)
+                implementation(libs.koin.compose)
+                implementation(libs.navigation.compose)
+                implementation(libs.kotlinx.serialization.json)
+                implementation(libs.coil.compose)
+                api("io.github.mirzemehdi:kmpnotifier:1.5.1")
+            }
+        }
+        val mobileMain by creating {
+            dependsOn(commonMain)
+            dependencies {
+                api(libs.permissions)
+                api(libs.permissions.compose)
+            }
+        }
+        val desktopMain by getting {
+            dependencies {
+                implementation(compose.desktop.currentOs)
+                implementation(libs.kotlinx.coroutines.swing)
+                implementation(libs.filekit.dialogs.core)
+                implementation(libs.filekit.dialogs.compose)
+            }
+        }
+        val androidMain by getting {
+            dependsOn(mobileMain)
+            dependencies {
+                implementation(compose.preview)
+                implementation(libs.androidx.activity.compose)
+                implementation(libs.androidx.core.splashscreen)
+                implementation(libs.androidx.camera.core)
+                implementation(libs.androidx.camera.camera2)
+                implementation(libs.androidx.camera.lifecycle)
+                implementation(libs.androidx.camera.view)
+            }
+        }
+        val iosMain by getting {
+            dependsOn(mobileMain)
+            dependencies {
+                implementation(libs.filekit.core)
+                implementation(libs.filekit.dialogs.core)
+                implementation(libs.filekit.dialogs.compose)
+            }
         }
     }
 }
 
 android {
-    namespace = "com.jetbrains.spacetutorial"
+    namespace = "com.jetbrains.cameraapp"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-    sourceSets["main"].res.srcDirs("src/androidMain/res")
-    sourceSets["main"].resources.srcDirs("src/commonMain/resources")
-
     defaultConfig {
-        applicationId = "com.jetbrains.spacetutorial"
+        applicationId = "com.jetbrains.cameraapp"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
@@ -65,11 +118,23 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    buildFeatures {
-        compose = true
-    }
-    dependencies {
-        debugImplementation(compose.uiTooling)
-    }
 }
 
+dependencies {
+    debugImplementation(compose.uiTooling)
+}
+
+compose.desktop {
+    application {
+        mainClass = "com.jetbrains.cameraapp.MainKt"
+
+        nativeDistributions {
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            appResourcesRootDir = layout.projectDirectory.dir("src/desktopMain/assets")
+            packageName = "com.jetbrains.cameraapp"
+            packageVersion = "1.0.0"
+            appResourcesRootDir = layout.projectDirectory.dir("src/desktopMain/assets")
+            jvmArgs += "-splash:${'$'}APPDIR/resources/splash.png"
+        }
+    }
+}

@@ -28,8 +28,6 @@ kotlin {
         iosTarget.binaries.framework {
             baseName = "ComposeApp"
             isStatic = true
-            export(project(":camera"))
-            export(project(":navigation"))
             export("io.github.mirzemehdi:kmpnotifier:1.5.1")
         }
     }

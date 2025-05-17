@@ -77,12 +77,11 @@ actual fun CameraScreen(navController: NavController, modifier: Modifier) {
     val onPicture: (String) -> Unit = { picture ->
         navController.navigate(CameraAppScreen.Picture(picture))
     }
-//    val isSimulator = true
-//    if (isSimulator) {
+    if (AVCaptureDevice.devices().isNotEmpty()) {
+        CameraScreenContents(onPicture, modifier)
+    } else {
         SimulatorScreenContents(onPicture, modifier)
-//    } else {
-//        CameraScreenContents(onPicture, modifier)
-//    }
+    }
 }
 
 @Composable

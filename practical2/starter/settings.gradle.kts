@@ -1,4 +1,4 @@
-rootProject.name = "SpaceTutorial"
+rootProject.name = "KotlinConfCameraApp"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
@@ -29,4 +29,3 @@ dependencyResolutionManagement {
 }
 
 include(":composeApp")
-include(":shared")

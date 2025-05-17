@@ -1,6 +1,14 @@
-[![official JetBrains project](https://jb.gg/badges/official.svg)](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub)
-[![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0)
+This is a Kotlin Multiplatform project targeting Android, iOS, Desktop.
 
-# Create a multiplatform app using Ktor and SQLDelight – tutorial
+* `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
+  It contains several subfolders:
+  - `commonMain` is for code that’s common for all targets.
+  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
+    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
+    `iosMain` would be the right folder for such calls.
 
-This repository is the code corresponding to the hands-on lab [Create a multiplatform app using Ktor and SQLDelight – tutorial](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-ktor-sqldelight.html).
+* `/iosApp` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform, 
+  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+
+
+Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
