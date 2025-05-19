@@ -7,16 +7,17 @@ androidx-activityCompose = "1.10.1"
 androidx-lifecycle = "2.8.4"
 cameraxVersion = "1.4.1"
 coilCompose = "3.1.0"
-compose-multiplatform = "1.8.0-alpha04"
+compose-multiplatform = "1.8.0"
 coreSplashscreen = "1.0.1"
 filekitCore = "0.10.0-beta03"
-kotlin = "2.1.20-RC2"
+kotlin = "2.1.20"
 kotlinx-coroutines = "1.10.1"
+materialIconsCore = "1.7.3"
 permissions = "0.18.1"
 koin = "4.0.3-Beta1"
 koinComposeViewmodel = "4.0.3-Beta1"
-navigationCompose = "2.9.0-alpha14"
-lifecycleViewmodelComposeVersion = "2.9.0-alpha04"
+navigationCompose = "2.9.0-beta01"
+lifecycleViewmodelComposeVersion = "2.9.0-beta01"
 kotlinx-serialization = "1.8.0"
 kotlinStdlib = "2.1.20-RC2"
 kotlinTest = "2.1.20-RC2"
@@ -38,6 +39,7 @@ filekit-dialogs-compose = { module = "io.github.vinceglb:filekit-dialogs-compose
 filekit-dialogs-core = { module = "io.github.vinceglb:filekit-dialogs", version.ref = "filekitCore" }
 filekit-core = { module = "io.github.vinceglb:filekit-core", version.ref = "filekitCore" }
 kotlinx-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
+material-icons-core = { module = "org.jetbrains.compose.material:material-icons-core", version.ref = "materialIconsCore" }
 permissions = { module = "dev.icerock.moko:permissions", version.ref = "permissions" }
 permissions-compose = { module = "dev.icerock.moko:permissions-compose", version.ref = "permissions" }
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koinComposeViewmodel" }
