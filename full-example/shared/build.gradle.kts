@@ -12,7 +12,7 @@ kotlin {
 
     applyDefaultHierarchyTemplate()
 
-    androidLibrary {
+    android {
         namespace = "com.jetbrains.cameraapp.shared"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
         minSdk = libs.versions.android.minSdk.get().toInt()
@@ -29,7 +29,7 @@ kotlin {
         iosTarget.binaries.framework {
             baseName = "Shared"
             isStatic = true
-            export("io.github.mirzemehdi:kmpnotifier:1.5.1")
+            export("io.github.mirzemehdi:kmpnotifier:1.6.1")
         }
     }
 
@@ -42,21 +42,21 @@ kotlin {
                 implementation(libs.koin.core)
                 implementation(libs.koin.compose.viewmodel)
                 api(libs.permissions)
-                api("dev.icerock.moko:permissions-camera:0.20.1")
-                api("dev.icerock.moko:permissions-notifications:0.20.1")
-                api("dev.icerock.moko:permissions-gallery:0.20.1")
+                api(libs.permissions.camera)
+                api(libs.permissions.notifications)
+                api(libs.permissions.gallery)
                 implementation(libs.permissions.compose)
             }
         }
 
         commonMain.dependencies {
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
+            implementation(libs.compose.runtime)
+            implementation(libs.compose.foundation)
+            implementation(libs.material3)
             implementation(libs.material.icons.core)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
+            implementation(libs.compose.ui)
+            implementation(libs.compose.components.resources)
+            implementation(libs.ui.tooling.preview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.lifecycle.viewmodel.compose)
             implementation(libs.androidx.lifecycle.runtime.compose)
@@ -66,7 +66,7 @@ kotlin {
             implementation(libs.navigation.compose)
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.coil.compose)
-            api("io.github.mirzemehdi:kmpnotifier:1.5.1")
+            api(libs.kmpnotifier)
         }
 
         jvmMain.dependencies {

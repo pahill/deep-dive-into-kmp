@@ -10,14 +10,12 @@ kotlin {
     jvm()
 
     sourceSets {
-        val jvmMain by getting {
-            dependencies {
-                implementation(project(":shared"))
-                implementation(compose.desktop.currentOs)
-                implementation(libs.kotlinx.coroutines.swing)
-                implementation(libs.filekit.dialogs.core)
-                implementation(libs.filekit.dialogs.compose)
-            }
+        jvmMain.dependencies {
+            implementation(project(":shared"))
+            implementation(compose.desktop.currentOs)
+            implementation(libs.kotlinx.coroutines.swing)
+            implementation(libs.filekit.dialogs.core)
+            implementation(libs.filekit.dialogs.compose)
         }
     }
 }
