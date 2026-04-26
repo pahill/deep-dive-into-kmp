@@ -68,13 +68,13 @@ actual fun PermissionsScreen(
                     modifier = Modifier.fillMaxSize()
                 ) {
                     permissionState.forEachIndexed { index, permissionState ->
-                        Text("Permission state for ${screenState.permissions[index]}: $permissionState")
+                        Text("Permission state for ${screenState.permissions[index].name}: $permissionState")
 
                         if (permissionState == PermissionState.NotDetermined || permissionState == PermissionState.NotGranted || permissionState == PermissionState.Denied) {
                             Button(
                                 onClick = {
                                     viewModel.onRequestPermissionButtonPressed(
-                                        screenState.permissions[index]
+                                        screenState.permissions[index].permission
                                     )
                                 },
                                 content = { Text("Grant permission") }

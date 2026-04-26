@@ -26,7 +26,7 @@ class PermissionsViewModel(
     }
 
     private suspend fun requestPermission(permission: Permission) {
-        val index = screenState.value.permissions.indexOf(permission)
+        val index = screenState.value.permissions.indexOfFirst { permission == it.permission }
         if (index != -1) {
             permissionManager.requestPermission(permission) { state ->
                 permissionState.update { it[index] = state; it }
@@ -44,7 +44,7 @@ class PermissionsViewModel(
                 permissionState.value = stateList.toMutableStateList()
                 for (index in 0..<permissions.size) {
                     permissionState.value[index] =
-                        permissionManager.getPermissionState(permissions[index])
+                        permissionManager.getPermissionState(permissions[index].permission)
                 }
             }
         }
@@ -54,5 +54,5 @@ class PermissionsViewModel(
 
 class PermissionScreenState(
     var inited: Boolean = false,
-    var permissions: List<Permission>
+    var permissions: List<PermissionNameType>
 )
