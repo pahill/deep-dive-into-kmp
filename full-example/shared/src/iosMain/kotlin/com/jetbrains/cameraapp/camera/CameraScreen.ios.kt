@@ -34,6 +34,7 @@ import platform.AVFoundation.AVLayerVideoGravityResizeAspectFill
 import platform.AVFoundation.AVMediaTypeVideo
 import platform.AVFoundation.fileDataRepresentation
 import platform.CoreGraphics.CGRectZero
+import platform.Foundation.NSProcessInfo
 import platform.Foundation.NSTemporaryDirectory
 import platform.Foundation.NSURL
 import platform.Foundation.writeToURL
@@ -77,7 +78,7 @@ actual fun CameraScreen(navController: NavController, modifier: Modifier) {
     val onPicture: (String) -> Unit = { picture ->
         navController.navigate(CameraAppScreen.Picture(picture))
     }
-    if (AVCaptureDevice.devices().isNotEmpty()) {
+    if (NSProcessInfo.processInfo.environment["SIMULATOR_DEVICE_NAME"] == null) {
         CameraScreenContents(onPicture, modifier)
     } else {
         SimulatorScreenContents(onPicture, modifier)
