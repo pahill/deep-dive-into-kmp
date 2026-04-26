@@ -68,20 +68,20 @@ fun App(context: PlatformContext) {
                         .fillMaxSize()
                 ) {
                     composable<CameraAppScreen.Permissions> {
-                        PermissionsScreen(navController)
+                        PermissionsScreen(
+                            navController
+                        )
                     }
                     composable<CameraAppScreen.Camera> {
                         CameraScreen(
-                            navController,
-                            modifier = Modifier
+                            navController
                         )
                     }
                     composable<Picture> { backStackEntry ->
                         val picture = backStackEntry.toRoute<Picture>()
                         PictureScreen(
                             imagePath = picture.imagePath,
-                            navController = navController,
-                            modifier = Modifier
+                            navController = navController
                         )
                     }
                 }

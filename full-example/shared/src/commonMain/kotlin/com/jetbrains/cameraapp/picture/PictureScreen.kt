@@ -65,7 +65,7 @@ fun PictureScreen(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(8.dp),
+                        .padding(2.dp),
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
                     Button(

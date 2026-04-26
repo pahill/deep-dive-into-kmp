@@ -1,5 +1,6 @@
 package com.jetbrains.cameraapp.camera
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -97,7 +98,8 @@ fun SimulatorScreenContents(onPicture: (String) -> Unit, modifier: Modifier) {
     }
 
     Column(
-        modifier = modifier,
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Button(

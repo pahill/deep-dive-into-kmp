@@ -32,18 +32,22 @@ actual fun PermissionsScreen(
         modifier = modifier
             .fillMaxSize()
             .padding(16.dp),
-        verticalArrangement = Arrangement.Center
     ) {
         if (!screenState.inited) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
+                horizontalArrangement = Arrangement.Center,
+                modifier = Modifier.fillMaxSize()
             ) {
                 Text("Loading...")
             }
         } else {
             if (permissionState.all { it == PermissionState.Granted }) {
-                Row(horizontalArrangement = Arrangement.Center, modifier = Modifier.fillMaxSize()) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center,
+                    modifier = Modifier.fillMaxSize()
+                ) {
                     Button(onClick = {
                         navController.navigate(CameraAppScreen.Camera) {
                             val root = navController.currentBackStack.value
@@ -58,7 +62,11 @@ actual fun PermissionsScreen(
                     }
                 }
             } else {
-                Column {
+                Column(
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.fillMaxSize()
+                ) {
                     permissionState.forEachIndexed { index, permissionState ->
                         Text("Permission state for ${screenState.permissions[index]}: $permissionState")
 
