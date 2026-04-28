@@ -20,9 +20,9 @@ material-iconsCore = "1.7.3"
 moko-permissions = "0.20.1"
 koin = "4.2.1"
 koin-composeViewModel = "4.2.1"
-navigation-compose = "2.9.2"
 lifecycle-viewmodel-compose = "2.11.0-alpha03"
 kotlinx-serialization = "1.11.0"
+compose-nav3-ui = "1.1.0"
 androidx-runner = "1.7.0"
 androidx-core = "1.7.0"
 androidx-jUnit = "1.3.0"
@@ -54,7 +54,7 @@ permissions-compose = { module = "dev.icerock.moko:permissions-compose", version
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin-composeViewModel" }
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin-composeViewModel" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
-navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
+navigation3-ui = { module = "org.jetbrains.androidx.navigation3:navigation3-ui", version.ref = "compose-nav3-ui" }
 lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle-viewmodel-compose" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 permissions-gallery = { module = "dev.icerock.moko:permissions-gallery", version.ref = "moko-permissions" }

@@ -7,11 +7,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import androidx.navigation.toRoute
+import androidx.navigation3.runtime.NavKey
+import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.runtime.rememberNavBackStack
+import androidx.navigation3.ui.NavDisplay
+import androidx.savedstate.serialization.SavedStateConfiguration
 import com.jetbrains.cameraapp.camera.CameraScreen
 import com.jetbrains.cameraapp.filter.BlackAndWhiteFilter
 import com.jetbrains.cameraapp.filter.GaussianBlurFilter
@@ -23,6 +23,8 @@ import com.jetbrains.cameraapp.permissions.PermissionsCheck
 import com.jetbrains.cameraapp.permissions.PermissionsScreen
 import com.jetbrains.cameraapp.picture.PictureScreen
 import com.jetbrains.cameraapp.picture.PictureScreenViewModel
+import kotlinx.serialization.modules.SerializersModule
+import kotlinx.serialization.modules.polymorphic
 import org.koin.compose.KoinApplication
 import org.koin.compose.koinInject
 import org.koin.core.module.dsl.viewModel
@@ -42,6 +44,16 @@ private fun appModule(context: PlatformContext) = module {
     }
 }
 
+private val config = SavedStateConfiguration {
+    serializersModule = SerializersModule {
+        polymorphic(NavKey::class) {
+            subclass(CameraAppScreen.Permissions::class, CameraAppScreen.Permissions.serializer())
+            subclass(CameraAppScreen.Camera::class, CameraAppScreen.Camera.serializer())
+            subclass(CameraAppScreen.Picture::class, CameraAppScreen.Picture.serializer())
+        }
+    }
+}
+
 @Composable
 fun App(context: PlatformContext) {
     KoinApplication(configuration = koinConfiguration(declaration = {
@@ -50,7 +62,6 @@ fun App(context: PlatformContext) {
             *otherModules().toTypedArray()
         )
     }), content = {
-        val navController: NavHostController = rememberNavController()
         val permissionsCheck = koinInject<PermissionsCheck>()
         val (permissionsAreGranted, setPermissionsAreGranted) = remember {
             mutableStateOf<Boolean?>(null)
@@ -59,33 +70,37 @@ fun App(context: PlatformContext) {
         LaunchedEffect(Unit) {
             setPermissionsAreGranted(permissionsCheck.isGranted())
         }
+
         if (permissionsAreGranted != null) {
+            val startRoute =
+                if (permissionsAreGranted) CameraAppScreen.Camera else CameraAppScreen.Permissions
+            val backStack = rememberNavBackStack(config, startRoute)
+
             MaterialTheme {
-                NavHost(
-                    navController = navController,
-                    startDestination = if (permissionsAreGranted) CameraAppScreen.Camera else CameraAppScreen.Permissions,
-                    modifier = Modifier
-                        .fillMaxSize()
-                ) {
-                    composable<CameraAppScreen.Permissions> {
-                        PermissionsScreen(
-                            navController
-                        )
-                    }
-                    composable<CameraAppScreen.Camera> {
-                        CameraScreen(
-                            navController
-                        )
-                    }
-                    composable<Picture> { backStackEntry ->
-                        val picture = backStackEntry.toRoute<Picture>()
-                        PictureScreen(
-                            imagePath = picture.imagePath,
-                            navController = navController
-                        )
-                    }
-                }
+                NavDisplay(
+                    backStack = backStack,
+                    onBack = { backStack.removeLastOrNull() },
+                    modifier = Modifier.fillMaxSize(),
+                    entryProvider = entryProvider {
+                        entry<CameraAppScreen.Permissions> {
+                            PermissionsScreen({ backStack.add(CameraAppScreen.Camera) })
+                        }
+                        entry<CameraAppScreen.Camera> {
+                            CameraScreen(onNext = { absoluteFilePath ->
+                                backStack.add(
+                                    CameraAppScreen.Picture(absoluteFilePath)
+                                )
+                            })
+                        }
+                        entry<Picture> { key ->
+                            PictureScreen(
+                                imagePath = key.imagePath,
+                                onBack = { backStack.removeLastOrNull() }
+                            )
+                        }
+                    })
             }
         }
-    })
+    }
+    )
 }

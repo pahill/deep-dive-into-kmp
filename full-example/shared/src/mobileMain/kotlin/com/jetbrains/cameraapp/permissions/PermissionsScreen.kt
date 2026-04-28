@@ -12,14 +12,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.jetbrains.cameraapp.navigation.CameraAppScreen
 import dev.icerock.moko.permissions.PermissionState
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 actual fun PermissionsScreen(
-    navController: NavController,
+    onNext: () -> Unit,
     modifier: Modifier
 ) {
     val viewModel: PermissionsViewModel = koinViewModel()
@@ -49,14 +48,7 @@ actual fun PermissionsScreen(
                     modifier = Modifier.fillMaxSize()
                 ) {
                     Button(onClick = {
-                        navController.navigate(CameraAppScreen.Camera) {
-                            val root = navController.currentBackStack.value
-                                .firstOrNull { it.destination.route != null }
-                                ?.destination?.route
-                            if (root != null) {
-                                popUpTo(root) { inclusive = true }
-                            }
-                        }
+                        onNext()
                     }) {
                         Text("Get Started")
                     }

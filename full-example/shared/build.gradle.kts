@@ -63,7 +63,7 @@ kotlin {
 
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.koin.compose)
-            implementation(libs.navigation.compose)
+            implementation(libs.navigation3.ui)
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.coil.compose)
             api(libs.kmpnotifier)

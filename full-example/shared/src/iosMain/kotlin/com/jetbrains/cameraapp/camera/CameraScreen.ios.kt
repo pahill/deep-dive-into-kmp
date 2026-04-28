@@ -16,8 +16,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.interop.UIKitView
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import com.jetbrains.cameraapp.navigation.CameraAppScreen
 import io.github.vinceglb.filekit.dialogs.FileKitType
 import io.github.vinceglb.filekit.dialogs.compose.rememberFilePickerLauncher
 import io.github.vinceglb.filekit.path
@@ -43,12 +41,7 @@ import platform.QuartzCore.CATransaction
 import platform.QuartzCore.kCATransactionDisableActions
 import platform.UIKit.UIView
 import platform.darwin.NSObject
-import kotlin.OptIn
-import kotlin.Throwable
-import kotlin.Unit
-import kotlin.let
 import kotlin.random.Random
-import kotlin.toString
 
 private class PhotoCaptureDelegate(val onPicture: (String) -> Unit) : NSObject(),
     AVCapturePhotoCaptureDelegateProtocol {
@@ -75,14 +68,11 @@ private class PhotoCaptureDelegate(val onPicture: (String) -> Unit) : NSObject()
 }
 
 @Composable
-actual fun CameraScreen(navController: NavController, modifier: Modifier) {
-    val onPicture: (String) -> Unit = { picture ->
-        navController.navigate(CameraAppScreen.Picture(picture))
-    }
+actual fun CameraScreen(onNext: (String) -> Unit, modifier: Modifier) {
     if (NSProcessInfo.processInfo.environment["SIMULATOR_DEVICE_NAME"] == null) {
-        CameraScreenContents(onPicture, modifier)
+        CameraScreenContents(onNext, modifier)
     } else {
-        SimulatorScreenContents(onPicture, modifier)
+        SimulatorScreenContents(onNext, modifier)
     }
 }
 
@@ -115,7 +105,7 @@ fun SimulatorScreenContents(onPicture: (String) -> Unit, modifier: Modifier) {
 
 @OptIn(ExperimentalForeignApi::class)
 @Composable
-fun CameraScreenContents(onPicture: (String) -> Unit, modifier: Modifier){
+fun CameraScreenContents(onPicture: (String) -> Unit, modifier: Modifier) {
     val callback by rememberUpdatedState { onPicture }
     val capture = remember { PhotoCaptureDelegate(callback.invoke()) }
 

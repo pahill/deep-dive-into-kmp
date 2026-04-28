@@ -21,14 +21,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.LocalLifecycleOwner
-import androidx.navigation.NavController
-import com.jetbrains.cameraapp.navigation.CameraAppScreen
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
 @Composable
-actual fun CameraScreen(navController: NavController, modifier: Modifier) {
+actual fun CameraScreen(onNext: (String) -> Unit, modifier: Modifier) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val cameraProviderFuture = remember { ProcessCameraProvider.getInstance(context) }
@@ -49,7 +47,7 @@ actual fun CameraScreen(navController: NavController, modifier: Modifier) {
             mainExecutor,
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                    navController.navigate(CameraAppScreen.Picture(photoFile.absolutePath))
+                    onNext(photoFile.absolutePath)
                 }
 
                 override fun onError(exception: ImageCaptureException) {
@@ -76,7 +74,7 @@ actual fun CameraScreen(navController: NavController, modifier: Modifier) {
                     val cameraProvider = cameraProviderFuture.get()
 
                     val preview = Preview.Builder().build().also {
-                        it.setSurfaceProvider(previewView.surfaceProvider)
+                        it.surfaceProvider = previewView.surfaceProvider
                     }
 
                     try {

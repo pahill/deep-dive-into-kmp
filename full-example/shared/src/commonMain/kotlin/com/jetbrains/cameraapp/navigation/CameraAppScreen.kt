@@ -1,9 +1,11 @@
 package com.jetbrains.cameraapp.navigation
 
+import androidx.navigation3.runtime.NavKey
 import kotlinx.serialization.Serializable
 
-object CameraAppScreen {
-    @Serializable object Permissions
-    @Serializable object Camera
-    @Serializable data class Picture(val imagePath: String)
+@Serializable
+sealed interface CameraAppScreen : NavKey {
+    @Serializable object Permissions : CameraAppScreen
+    @Serializable object Camera : CameraAppScreen
+    @Serializable data class Picture(val imagePath: String) : CameraAppScreen
 }

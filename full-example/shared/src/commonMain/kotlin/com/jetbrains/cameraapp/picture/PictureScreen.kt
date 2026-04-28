@@ -23,7 +23,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import coil3.compose.AsyncImage
 import coil3.compose.LocalPlatformContext
 import coil3.request.CachePolicy
@@ -35,7 +34,7 @@ import org.koin.core.parameter.parametersOf
 @Composable
 fun PictureScreen(
     imagePath: String,
-    navController: NavController,
+    onBack: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: PictureScreenViewModel = koinViewModel<PictureScreenViewModel>() {
         parametersOf(
@@ -51,7 +50,7 @@ fun PictureScreen(
             TopAppBar(
                 title = { Text("Preview") },
                 navigationIcon = {
-                    IconButton(onClick = navController::navigateUp) {
+                    IconButton(onClick = { onBack() }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = "Back"
