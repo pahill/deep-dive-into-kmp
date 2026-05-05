@@ -12,16 +12,15 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.jetbrains.cameraapp.navigation.CameraAppScreen
 import dev.icerock.moko.permissions.PermissionState
-import org.koin.compose.viewmodel.koinViewModel
+import dev.zacsweers.metrox.viewmodel.metroViewModel
 
 @Composable
 actual fun PermissionsScreen(
     onNext: () -> Unit,
     modifier: Modifier
 ) {
-    val viewModel: PermissionsViewModel = koinViewModel()
+    val viewModel: PermissionsViewModel = metroViewModel()
     viewModel.requestPermissions()
 
     val screenState = viewModel.screenState.collectAsState().value

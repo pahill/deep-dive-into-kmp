@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.metro)
     id("com.google.gms.google-services")
 }
 
@@ -38,5 +39,7 @@ dependencies {
     implementation(project(":shared"))
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.core.splashscreen)
+    implementation(libs.metrox.android)
+    implementation(libs.metrox.viewmodel.compose)
     debugImplementation(libs.androidx.ui.tooling)
 }

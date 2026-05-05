@@ -27,8 +27,7 @@ import coil3.compose.AsyncImage
 import coil3.compose.LocalPlatformContext
 import coil3.request.CachePolicy
 import coil3.request.ImageRequest
-import org.koin.compose.viewmodel.koinViewModel
-import org.koin.core.parameter.parametersOf
+import dev.zacsweers.metrox.viewmodel.metroViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -36,10 +35,9 @@ fun PictureScreen(
     imagePath: String,
     onBack: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: PictureScreenViewModel = koinViewModel<PictureScreenViewModel>() {
-        parametersOf(
-            imagePath
-        )
+    viewModel: PictureScreenViewModel = metroViewModel<PictureScreenViewModel>().also {
+        //Marton plz help - I'm not sure I'm doing this correctly
+        it.imagePath = imagePath
     }
 ) {
     val isProcessing by viewModel.isProcessing.collectAsState()

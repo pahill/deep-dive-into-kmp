@@ -5,12 +5,17 @@ import android.renderscript.Allocation
 import android.renderscript.Element
 import android.renderscript.RenderScript
 import android.renderscript.ScriptIntrinsicBlur
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
+import dev.zacsweers.metro.Assisted
+import dev.zacsweers.metro.AssistedFactory
+import dev.zacsweers.metro.AssistedInject
+import dev.zacsweers.metro.Inject
 import java.io.File
 
-class AndroidGaussianBlurFilter : GaussianBlurFilter, KoinComponent {
-    private val context: Context by inject()
+@Inject
+class AndroidGaussianBlurFilter : GaussianBlurFilter {
+
+    //Marton plz help: I don't want to use lateinit here
+    private lateinit var context: Context
 
     override fun filter(imagePath: String, radius: Float) {
         validate(imagePath)
@@ -57,4 +62,5 @@ class AndroidGaussianBlurFilter : GaussianBlurFilter, KoinComponent {
     }
 }
 
+@Inject
 actual fun getGaussianBlurFilter(): GaussianBlurFilter = AndroidGaussianBlurFilter()

@@ -3,6 +3,7 @@ package com.jetbrains.cameraapp
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -15,33 +16,21 @@ import androidx.savedstate.serialization.SavedStateConfiguration
 import com.jetbrains.cameraapp.camera.CameraScreen
 import com.jetbrains.cameraapp.filter.BlackAndWhiteFilter
 import com.jetbrains.cameraapp.filter.GaussianBlurFilter
-import com.jetbrains.cameraapp.filter.getBlackAndWhiteFilter
-import com.jetbrains.cameraapp.filter.getGaussianBlurFilter
 import com.jetbrains.cameraapp.navigation.CameraAppScreen
 import com.jetbrains.cameraapp.navigation.CameraAppScreen.Picture
 import com.jetbrains.cameraapp.permissions.PermissionsCheck
 import com.jetbrains.cameraapp.permissions.PermissionsScreen
 import com.jetbrains.cameraapp.picture.PictureScreen
-import com.jetbrains.cameraapp.picture.PictureScreenViewModel
+import dev.zacsweers.metro.Inject
+import dev.zacsweers.metrox.viewmodel.LocalMetroViewModelFactory
+import dev.zacsweers.metrox.viewmodel.MetroViewModelFactory
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
-import org.koin.compose.KoinApplication
-import org.koin.compose.koinInject
-import org.koin.core.module.dsl.viewModel
-import org.koin.dsl.koinConfiguration
-import org.koin.dsl.module
 
-private fun appModule(context: PlatformContext) = module {
-    single<PlatformContext> { context }
-    factory<BlackAndWhiteFilter> { getBlackAndWhiteFilter() }
-    factory<GaussianBlurFilter> { getGaussianBlurFilter() }
-    viewModel { params ->
-        PictureScreenViewModel(
-            imagePath = params.get(),
-            blackAndWhiteFilter = get(),
-            blurFilter = get()
-        )
-    }
+interface AppGraph {
+    val permissionsCheck: PermissionsCheck
+    val blackAndWhiteFilter: BlackAndWhiteFilter
+    val blurFilter: GaussianBlurFilter
 }
 
 private val config = SavedStateConfiguration {
@@ -55,14 +44,9 @@ private val config = SavedStateConfiguration {
 }
 
 @Composable
-fun App(context: PlatformContext) {
-    KoinApplication(configuration = koinConfiguration(declaration = {
-        modules(
-            appModule(context),
-            *otherModules().toTypedArray()
-        )
-    }), content = {
-        val permissionsCheck = koinInject<PermissionsCheck>()
+@Inject
+fun App(metroVmf: MetroViewModelFactory, permissionsCheck: PermissionsCheck) {
+    CompositionLocalProvider(LocalMetroViewModelFactory provides metroVmf) {
         val (permissionsAreGranted, setPermissionsAreGranted) = remember {
             mutableStateOf<Boolean?>(null)
         }
@@ -102,5 +86,4 @@ fun App(context: PlatformContext) {
             }
         }
     }
-    )
 }

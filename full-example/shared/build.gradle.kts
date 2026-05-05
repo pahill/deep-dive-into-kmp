@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinxSerialization)
+    alias(libs.plugins.metro)
 }
 
 kotlin {
@@ -39,8 +40,6 @@ kotlin {
         val mobileMain by creating {
             dependsOn(commonMain.get())
             dependencies {
-                implementation(libs.koin.core)
-                implementation(libs.koin.compose.viewmodel)
                 api(libs.permissions)
                 api(libs.permissions.camera)
                 api(libs.permissions.notifications)
@@ -60,13 +59,12 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.lifecycle.viewmodel.compose)
             implementation(libs.androidx.lifecycle.runtime.compose)
-
-            implementation(libs.koin.compose.viewmodel)
-            implementation(libs.koin.compose)
             implementation(libs.navigation3.ui)
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.coil.compose)
             api(libs.kmpnotifier)
+            implementation(libs.metrox.viewmodel)
+            implementation(libs.metrox.viewmodel.compose)
         }
 
         jvmMain.dependencies {
@@ -80,6 +78,7 @@ kotlin {
         androidMain {
             dependsOn(mobileMain)
             dependencies {
+                implementation(libs.metrox.android)
                 implementation(libs.androidx.camera.core)
                 implementation(libs.androidx.camera.camera2)
                 implementation(libs.androidx.camera.lifecycle)

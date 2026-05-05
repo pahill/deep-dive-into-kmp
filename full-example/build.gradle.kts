@@ -9,4 +9,5 @@ plugins {
     alias(libs.plugins.kotlinxSerialization) apply false
     id("com.google.gms.google-services") version "4.4.4" apply false
     alias(libs.plugins.androidLint) apply false
+    alias(libs.plugins.metro) apply false
 }

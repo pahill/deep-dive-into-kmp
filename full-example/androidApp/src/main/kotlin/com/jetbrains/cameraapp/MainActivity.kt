@@ -1,27 +1,33 @@
 package com.jetbrains.cameraapp
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.jetbrains.cameraapp.permissions.PermissionsCheck
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesIntoMap
+import dev.zacsweers.metro.Inject
+import dev.zacsweers.metro.binding
+import dev.zacsweers.metrox.android.ActivityKey
+import dev.zacsweers.metrox.viewmodel.LocalMetroViewModelFactory
+import dev.zacsweers.metrox.viewmodel.MetroViewModelFactory
 
-class MainActivity : ComponentActivity() {
+@ActivityKey
+@ContributesIntoMap(AppScope::class, binding = binding<Activity>())
+@Inject
+public class MainActivity(private val permissionsCheck: PermissionsCheck, private val metroVmf: MetroViewModelFactory) : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         installSplashScreen()
 
         setContent {
-            App(LocalContext.current)
+            CompositionLocalProvider(LocalMetroViewModelFactory provides metroVmf) {
+                App(metroVmf, permissionsCheck)
+            }
         }
     }
-}
-
-@Preview
-@Composable
-fun AppAndroidPreview() {
-    App(LocalContext.current)
 }
