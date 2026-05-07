@@ -1,7 +1,7 @@
 package com.jetbrains.cameraapp.filter
 
 import android.graphics.*
-import android.media.ExifInterface
+import androidx.exifinterface.media.ExifInterface
 import java.io.File
 
 internal fun validate(imagePath: String) {

@@ -11,7 +11,7 @@ import FirebaseMessaging
        FirebaseApp.configure() //important
 
        NotifierManager.shared.initialize(configuration: NotificationPlatformConfigurationIos(
-             showPushNotification: true,
+             showPushNotification: false,
              askNotificationPermissionOnStart: false,
              notificationSoundName: nil
            )

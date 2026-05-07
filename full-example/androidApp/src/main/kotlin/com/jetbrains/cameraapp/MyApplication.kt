@@ -11,7 +11,7 @@ class MyApplication : Application() {
         NotifierManager.initialize(
             configuration = NotificationPlatformConfiguration.Android(
                 notificationIconResId = R.drawable.camera_splash,
-                showPushNotification = true,
+                showPushNotification = false,
             )
         )
     }

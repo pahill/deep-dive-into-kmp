@@ -10,6 +10,8 @@ class IOSBlackAndWhiteFilter : BlackAndWhiteFilter{
     override fun filter(imagePath: String) {
         validateImageFile(imagePath)
 
+        println("imagePath: $imagePath")
+
         // Load the image
         val originalImage = UIImage.imageWithContentsOfFile(imagePath)
             ?: throw IllegalArgumentException("Failed to load image: $imagePath")
@@ -28,7 +30,7 @@ class IOSBlackAndWhiteFilter : BlackAndWhiteFilter{
             8u,
             (width * 4).toULong(),
             colorSpace,
-            CGImageAlphaInfo.kCGImageAlphaNone.value.toUInt()
+            CGImageAlphaInfo.kCGImageAlphaNone.value
         )
 
         if (context != null) {
@@ -57,11 +59,11 @@ class IOSBlackAndWhiteFilter : BlackAndWhiteFilter{
                 } else {
                     throw IllegalStateException("Failed to encode processed image")
                 }
-                //CGImageRelease(grayscaleImage)
+                CGImageRelease(grayscaleImage)
             } else {
                 throw IllegalStateException("Failed to create grayscale image")
             }
-            //CGContextRelease(context)
+            CGContextRelease(context)
         } else {
             throw IllegalStateException("Failed to create graphics context")
         }
