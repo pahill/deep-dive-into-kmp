@@ -1,4 +1,4 @@
-rootProject.name = "KotlinConfCameraApp"
+rootProject.name = "whereiskodee"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
@@ -10,6 +10,7 @@ pluginManagement {
                 includeGroupAndSubgroups("com.google")
             }
         }
+        maven("https://redirector.kotlinlang.org/maven/dev")
         mavenCentral()
         gradlePluginPortal()
     }
@@ -24,10 +25,9 @@ dependencyResolutionManagement {
                 includeGroupAndSubgroups("com.google")
             }
         }
+        maven("https://redirector.kotlinlang.org/maven/dev")
         mavenCentral()
     }
 }
 
-include(":composeApp")
-include(":camera")
-include(":navigation")
+include(":shared")
