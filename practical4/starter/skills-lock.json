@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "skills": {
+    "kotlin-backend-jpa-entity-mapping": {
+      "source": "Kotlin/kotlin-agent-skills",
+      "sourceType": "github",
+      "computedHash": "bb8a17ea867471bd8e38989ddb53df251dcfa85b5f9f6794b89a2c1167b7f86f"
+    },
+    "kotlin-tooling-agp9-migration": {
+      "source": "Kotlin/kotlin-agent-skills",
+      "sourceType": "github",
+      "computedHash": "7bfe5304e56028ce01e2ec6bad95928b2093e8dda945b873a3f6aa8461881ff9"
+    },
+    "kotlin-tooling-cocoapods-spm-migration": {
+      "source": "Kotlin/kotlin-agent-skills",
+      "sourceType": "github",
+      "computedHash": "1b13979a87569b67e3264a8c2d2e3f813703318668948a67562592b8275b66fb"
+    },
+    "kotlin-tooling-java-to-kotlin": {
+      "source": "Kotlin/kotlin-agent-skills",
+      "sourceType": "github",
+      "computedHash": "c0fb7dd11aa110da86406c042d7fbac7f3c2334524f53b368d88eed0b87a323e"
+    }
+  }
+}

@@ -10,8 +10,9 @@
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
-		66649C452D9192C600BAD882 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 66649C442D9192C600BAD882 /* FirebaseMessaging */; };
 		66649C472D91977D00BAD882 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 66649C462D91977D00BAD882 /* GoogleService-Info.plist */; };
+		6682C7572FACC796008F8638 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 6682C7562FACC796008F8638 /* FirebaseMessaging */; };
+		6682C7592FACCA66008F8638 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 6682C7582FACCA66008F8638 /* FirebaseCore */; settings = {ATTRIBUTES = (Required, ); }; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,7 +32,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66649C452D9192C600BAD882 /* FirebaseMessaging in Frameworks */,
+				6682C7592FACCA66008F8638 /* FirebaseCore in Frameworks */,
+				6682C7572FACC796008F8638 /* FirebaseMessaging in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,7 +112,8 @@
 			);
 			name = iosApp;
 			packageProductDependencies = (
-				66649C442D9192C600BAD882 /* FirebaseMessaging */,
+				6682C7562FACC796008F8638 /* FirebaseMessaging */,
+				6682C7582FACCA66008F8638 /* FirebaseCore */,
 			);
 			productName = iosApp;
 			productReference = 7555FF7B242A565900829871 /* KotlinConfCameraApp.app */;
@@ -142,7 +145,7 @@
 			);
 			mainGroup = 7555FF72242A565900829871;
 			packageReferences = (
-				66649C432D9192C600BAD882 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				6682C7532FACC796008F8638 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 7555FF7C242A565900829871 /* Products */;
 			projectDirPath = "";
@@ -183,7 +186,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"YES\" = \"$OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED\" ]; then\n  echo \"Skipping Gradle build task invocation due to OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED environment variable set to \\\"YES\\\"\"\n  exit 0\nfi\ncd \"$SRCROOT/..\"\n./gradlew :composeApp:embedAndSignAppleFrameworkForXcode\n";
+			shellScript = "if [ \"YES\" = \"$OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED\" ]; then\n  echo \"Skipping Gradle build task invocation due to OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED environment variable set to \\\"YES\\\"\"\n  exit 0\nfi\ncd \"$SRCROOT/..\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -331,7 +334,7 @@
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)\n$(SRCROOT)/../composeApp/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
+					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)\n$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
 				INFOPLIST_FILE = iosApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.3;
@@ -359,7 +362,7 @@
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)\n$(SRCROOT)/../composeApp/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
+					"$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)\n$(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)",
 				);
 				INFOPLIST_FILE = iosApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.3;
@@ -400,21 +403,26 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		66649C432D9192C600BAD882 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		6682C7532FACC796008F8638 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 11.10.0;
+				minimumVersion = 12.13.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		66649C442D9192C600BAD882 /* FirebaseMessaging */ = {
+		6682C7562FACC796008F8638 /* FirebaseMessaging */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 66649C432D9192C600BAD882 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 6682C7532FACC796008F8638 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
+		};
+		6682C7582FACCA66008F8638 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6682C7532FACC796008F8638 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

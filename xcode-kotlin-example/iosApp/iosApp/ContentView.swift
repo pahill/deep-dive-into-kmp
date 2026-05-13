@@ -1,5 +1,5 @@
 import SwiftUI
-import Shared
+import SharedLogic
 
 struct ContentView: View {
     @ObservedObject private(set) var viewModel: ViewModel
@@ -11,7 +11,7 @@ struct ContentView: View {
             .navigationBarItems(trailing:
                 Button("Reload") {
                     self.viewModel.loadLaunches(forceReload: true)
-            })
+                })
         }
     }
 
@@ -48,13 +48,13 @@ extension ContentView {
 
         func loadLaunches(forceReload: Bool) {
             Task {
-               do {
-                   self.launches = .loading
-                   let launches = try await helper.getLaunches(forceReload: forceReload)
-                   self.launches = .result(launches)
-               } catch {
-                   self.launches = .error(error.localizedDescription)
-               }
+                do {
+                    self.launches = .loading
+                    let launches = try await helper.getLaunches(forceReload: forceReload)
+                    self.launches = .result(launches)
+                } catch {
+                    self.launches = .error(error.localizedDescription)
+                }
             }
         }
     }
