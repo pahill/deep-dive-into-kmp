@@ -1,30 +1,30 @@
 import SwiftUI
-import ComposeApp
+import Shared
 import FirebaseCore
 import FirebaseMessaging
 
-class AppDelegate: NSObject, UIApplicationDelegate {
+ class AppDelegate: NSObject, UIApplicationDelegate {
 
-  func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+   func application(_ application: UIApplication,
+                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
 
-      FirebaseApp.configure() //important
+       FirebaseApp.configure() //important
 
-      NotifierManager.shared.initialize(configuration: NotificationPlatformConfigurationIos(
-            showPushNotification: true,
-            askNotificationPermissionOnStart: false,
-            notificationSoundName: nil
-          )
-      )
+       NotifierManager.shared.initialize(configuration: NotificationPlatformConfigurationIos(
+             showPushNotification: false,
+             askNotificationPermissionOnStart: false,
+             notificationSoundName: nil
+           )
+       )
 
-    return true
-  }
+     return true
+   }
 
-  func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        Messaging.messaging().apnsToken = deviceToken
-  }
+   func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+         Messaging.messaging().apnsToken = deviceToken
+   }
 
-}
+ }
 
 @main
 struct iOSApp: App {
