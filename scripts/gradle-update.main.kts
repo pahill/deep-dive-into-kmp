@@ -11,6 +11,23 @@ require(configFile.isFile) {
     "Missing config file: ${configFile.relativeTo(rootDir)}"
 }
 
+require(args.size <= 1) {
+    "Usage: kotlin scripts/gradle-update.main.kts [project-folder]"
+}
+
+val requestedProjectDir = args.singleOrNull()
+    ?.let { rootDir.resolve(it).canonicalFile }
+
+if (requestedProjectDir != null) {
+    require(requestedProjectDir.isDirectory) {
+        "Project folder does not exist or is not a directory: ${requestedProjectDir.relativeToOrSelf(rootDir)}"
+    }
+
+    require(requestedProjectDir.toPath().startsWith(rootDir.toPath())) {
+        "Project folder must be inside repository root: $requestedProjectDir"
+    }
+}
+
 val properties = Properties().apply {
     configFile.inputStream().use(::load)
 }
@@ -133,8 +150,20 @@ fun gradleCommandFor(projectDir: File): List<String> {
     }
 }
 
-val projects = findGradleProjects(rootDir)
-    .filter(::hasGradleWrapper)
+val projects = if (requestedProjectDir != null) {
+    require(isGradleProject(requestedProjectDir)) {
+        "Requested folder is not a Gradle project: ${requestedProjectDir.relativeTo(rootDir)}"
+    }
+
+    require(hasGradleWrapper(requestedProjectDir)) {
+        "Requested Gradle project does not have wrapper files: ${requestedProjectDir.relativeTo(rootDir)}"
+    }
+
+    listOf(requestedProjectDir)
+} else {
+    findGradleProjects(rootDir)
+        .filter(::hasGradleWrapper)
+}
 
 if (projects.isEmpty()) {
     println("No Gradle projects with wrappers found.")
@@ -142,6 +171,9 @@ if (projects.isEmpty()) {
 }
 
 println("Root: $rootDir")
+if (requestedProjectDir != null) {
+    println("Requested project: ${requestedProjectDir.relativeTo(rootDir)}")
+}
 println("Gradle version: $gradleVersion")
 println("Distribution type: $distributionType")
 println("Toolchain version: $toolchainVersion")
