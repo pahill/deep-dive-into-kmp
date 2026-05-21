@@ -180,12 +180,17 @@ println("Toolchain version: $toolchainVersion")
 println("Toolchain vendor: $toolchainVendor")
 
 println()
-println("Found ${projects.size} Gradle project(s) with wrappers:")
+println("Updating ${projects.size} Gradle project(s) with wrappers:")
 projects.forEach {
     println(" - ${it.relativeTo(rootDir)}")
 }
 
-var failures = 0
+val failures = mutableListOf<Pair<File, String>>()
+
+fun recordFailure(projectDir: File, reason: String) {
+    failures += projectDir to reason
+    println("$reason: ${projectDir.relativeTo(rootDir)}")
+}
 
 projects.forEach { projectDir ->
     val gradleCommand = gradleCommandFor(projectDir)
@@ -202,8 +207,7 @@ projects.forEach { projectDir ->
     val wrapperVersionExitCode = runCommand(projectDir, wrapperVersionCommand)
 
     if (wrapperVersionExitCode != 0) {
-        failures += 1
-        println("Failed to update wrapper version: ${projectDir.relativeTo(rootDir)}")
+        recordFailure(projectDir, "Failed to update wrapper version")
 
         return@forEach
     }
@@ -216,8 +220,7 @@ projects.forEach { projectDir ->
     val wrapperRefreshExitCode = runCommand(projectDir, wrapperRefreshCommand)
 
     if (wrapperRefreshExitCode != 0) {
-        failures += 1
-        println("Failed to refresh wrapper files: ${projectDir.relativeTo(rootDir)}")
+        recordFailure(projectDir, "Failed to refresh wrapper files")
 
         return@forEach
     }
@@ -234,15 +237,19 @@ projects.forEach { projectDir ->
     val daemonJvmExitCode = runCommand(projectDir, daemonJvmCommand)
 
     if (daemonJvmExitCode != 0) {
-        failures += 1
-        println("Failed to update daemon JVM criteria: ${projectDir.relativeTo(rootDir)}")
+        recordFailure(projectDir, "Failed to update daemon JVM criteria")
     }
 }
 
 println()
-if (failures == 0) {
+if (failures.isEmpty()) {
     println("Done. Updated ${projects.size} Gradle project(s).")
 } else {
-    println("Done with $failures failure(s).")
+    println("Done with ${failures.size} failure(s).")
+    println()
+    println("Failed project(s):")
+    failures.forEach { (projectDir, reason) ->
+        println(" - ${projectDir.relativeTo(rootDir)}: $reason")
+    }
     exitProcess(1)
 }
