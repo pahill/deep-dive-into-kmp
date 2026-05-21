@@ -158,7 +158,8 @@ var failures = 0
 projects.forEach { projectDir ->
     val gradleCommand = gradleCommandFor(projectDir)
 
-    val wrapperCommand = gradleCommand + listOf(
+    val wrapperVersionCommand = gradleCommand + listOf(
+        "--no-daemon",
         "wrapper",
         "--gradle-version",
         gradleVersion,
@@ -166,15 +167,31 @@ projects.forEach { projectDir ->
         distributionType
     )
 
-    val wrapperExitCode = runCommand(projectDir, wrapperCommand)
+    val wrapperVersionExitCode = runCommand(projectDir, wrapperVersionCommand)
 
-    if (wrapperExitCode != 0) {
+    if (wrapperVersionExitCode != 0) {
         failures += 1
-        println("Failed to update wrapper: ${projectDir.relativeTo(rootDir)}")
+        println("Failed to update wrapper version: ${projectDir.relativeTo(rootDir)}")
+
+        return@forEach
+    }
+
+    val wrapperRefreshCommand = gradleCommand + listOf(
+        "--no-daemon",
+        "wrapper"
+    )
+
+    val wrapperRefreshExitCode = runCommand(projectDir, wrapperRefreshCommand)
+
+    if (wrapperRefreshExitCode != 0) {
+        failures += 1
+        println("Failed to refresh wrapper files: ${projectDir.relativeTo(rootDir)}")
+
         return@forEach
     }
 
     val daemonJvmCommand = gradleCommand + listOf(
+        "--no-daemon",
         "updateDaemonJvm",
         "--jvm-version",
         toolchainVersion,
