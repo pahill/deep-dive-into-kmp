@@ -28,7 +28,6 @@ kotlin {
     }
 
     listOf(
-        iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     ).forEach { iosTarget ->
@@ -47,11 +46,6 @@ kotlin {
         implementation(libs.runtime)
         implementation(libs.kotlinx.datetime)
         implementation(libs.koin.core)
-        testImplementation(libs.kotlin.test)
-        testImplementation(libs.kotlin.testJunit)
-        testImplementation(libs.junit)
-        testImplementation(libs.mockk)
-        testImplementation(libs.kotlinx.coroutines.test)
     }
 
     sourceSets {

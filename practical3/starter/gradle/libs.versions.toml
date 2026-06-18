@@ -1,6 +1,6 @@
 [versions]
 junit = "4.13.2"
-kotlin = "2.1.0"
+kotlin = "2.4.0"
 kotlinxCoroutines = "1.10.1"
 kotlinxDatetime = "0.6.1"
 
@@ -10,7 +10,6 @@ kotlin-testJunit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.
 junit = { module = "junit:junit", version.ref = "junit" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
-
 
 [plugins]
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }

@@ -1,6 +1,6 @@
 [versions]
 junit = "4.13.2"
-kotlin = "2.4.0-Beta2"
+kotlin = "2.4.0"
 kotlinxCoroutines = "1.10.1"
 kotlinxDatetime = "0.6.1"
 
