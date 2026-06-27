@@ -32,4 +32,5 @@ dependencyResolutionManagement {
 }
 
 include(":androidApp")
+include(":sharedUI")
 include(":sharedLogic")

@@ -1,33 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Bucket
-   uuid = "918188CA-D738-4D82-98EF-80A5BF3E8E4F"
+   uuid = "77B98056-B0ED-4410-9C63-89117B782260"
    type = "1"
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "435F1A6E-AF94-4663-A2F6-5C7B3AA1E494"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../sharedLogic/src/commonMain/kotlin/com/jetbrains/spacetutorial/SpaceXSDK.kt"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "12"
-            endingLineNumber = "12"
-            landmarkName = "unknown"
-            landmarkType = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F8BBCAAE-62B1-4D41-B64C-7756CDBDCBF7"
+            uuid = "559B7DA6-6795-4643-91F9-936DF2DD8418"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../sharedLogic/src/commonMain/kotlin/com/jetbrains/spacetutorial/SpaceXSDK.kt"
+            filePath = "../sharedLogic/src/commonMain/kotlin/com/jetbrains/spacetutorial/SpaceSDK.kt"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "13"

@@ -13,7 +13,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3BC08461B58C40E446E181F0"
+               BlueprintIdentifier = "B9DA97B02DC1472C00A4DA20"
                BuildableName = "spacetutorial.app"
                BlueprintName = "iosApp"
                ReferencedContainer = "container:iosApp.xcodeproj">
@@ -42,7 +42,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3BC08461B58C40E446E181F0"
+            BlueprintIdentifier = "B9DA97B02DC1472C00A4DA20"
             BuildableName = "spacetutorial.app"
             BlueprintName = "iosApp"
             ReferencedContainer = "container:iosApp.xcodeproj">

@@ -36,7 +36,7 @@ fun PictureScreen(
     imagePath: String,
     onBack: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: PictureScreenViewModel = koinViewModel<PictureScreenViewModel> {
+    viewModel: PictureScreenViewModel = koinViewModel<PictureScreenViewModel>(key = imagePath) {
         parametersOf(
             imagePath
         )
